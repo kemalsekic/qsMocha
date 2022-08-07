@@ -1,0 +1,19 @@
+{
+  "name": "qsmocha",
+  "version": "0.0.1",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "mocha --reporter spec",
+    "qstest": "mocha --reporter report/qsreport.js"
+  },
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "chai": "^4.3.6",
+    "mocha": "^10.0.0"
+  },
+  "dependencies": {
+    "chalk": "^4.1.0"
+  }
+}
