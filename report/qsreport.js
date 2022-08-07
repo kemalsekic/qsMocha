@@ -7,6 +7,8 @@ var Mocha = require('mocha'),
     
 // const Mocha = require('mocha');
 var Logger = require('../report/template');
+var QSLogger = require('../report/qsLogger');
+
 const {
   EVENT_RUN_BEGIN,
   EVENT_RUN_END,
@@ -26,7 +28,8 @@ class QSReport {
 
     runner
       .once(EVENT_RUN_BEGIN, () => {
-        console.log('start');
+        QSLogger.displayDefaultMsg();
+        QSLogger.logBeginRun();
       })
       .on(EVENT_SUITE_BEGIN, () => {
         this.increaseIndent();
@@ -35,20 +38,18 @@ class QSReport {
         this.decreaseIndent();
       })
       .on(EVENT_TEST_PASS, test => {
-        // Test#fullTitle() returns the suite name(s)
-        // prepended to the test title
-        console.log(`${this.indent()}pass: ${test.fullTitle()}`);
-        // this.showResults(stats);
+        // console.log(`${this.indent()}pass: ${test.fullTitle()}`);
+        QSLogger.logPassedTest(test.fullTitle());
       })
       .on(EVENT_TEST_FAIL, (test, err) => {
-        console.log(
-          `${this.indent()}fail: ${test.fullTitle()} - error: ${err.message}`
-        );
+        QSLogger.logFailedTest(test.fullTitle(), err.message);
+        // console.log(
+        //   `${this.indent()}fail: ${test.fullTitle()} - error: ${err.message}`
+        // );
       })
       .once(EVENT_RUN_END, () => {
-        // this.showResults();
-        Logger.passedTests(`${stats.passes}/${stats.passes + stats.failures} ok`);
-        console.log(`end:`);
+        QSLogger.finalResult(`${stats.passes}/${stats.passes + stats.failures} ok`);
+        // console.log(`end:`);
       });
   }
 
@@ -63,16 +64,6 @@ class QSReport {
   decreaseIndent() {
     this._indents--;
   }
-
-  showResults(statistics) {
-    console.log("Passes: ", statistics.passes);
-    this.totalPassed = statistics.passes;
-    this.printPasses();
-  }
-
-  printPasses() {
-    console.log("Now here are the results: ", this.totalPassed);
-}
 }
 
 

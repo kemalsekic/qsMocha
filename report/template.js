@@ -1,20 +1,6 @@
-// Template.prototype.clearCompletedButtons = function (completedTodos) {
-//     console.log("Completed to dos: ", completedTodos);
-//     if (completedTodos > 0) {
-//         return 'Clear completed';
-//     } else {
-//         return '';
-//     }
-// };
-// import chalk from 'chalk';
 const chalk = require('chalk');
-console.log(chalk.blue("message"));
 
-class Logger {
-    static passes = 0;
-
-    static defaultMessage = "Hello World";
-  
+class Logger {  
     static info(message) {
       console.log(chalk.blue(message));
     }
@@ -34,7 +20,7 @@ class Logger {
     }
 
     static clearCompletedButtons = function (completedTodos) {
-        console.log(chalk.blue("Completed to dos: ", completedTodos));
+        // console.log(chalk.blue("Completed tasks: ", completedTodos));
         if (completedTodos > 0) {
             return 'Clear completed';
         } else {
@@ -44,7 +30,3 @@ class Logger {
   }
   
   module.exports = Logger;
-
-// const qsReport = require('report/qsreport.js');
-
-// console.log(qsReport.stats);
