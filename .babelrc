@@ -1,0 +1,18 @@
+{
+    "presets": [
+            
+        [
+        "@babel/preset-env",
+        {
+          "env": "ES2020",
+            "targets": {
+              "esmodules": true
+            }
+        }]
+    ],
+    "plugins": [
+        ["@babel/plugin-transform-modules-commonjs", {
+          "allowTopLevelThis": true
+        }]
+      ]
+}

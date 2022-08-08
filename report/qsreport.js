@@ -1,12 +1,8 @@
 // QSReport.js
 
 'use strict';
-var Mocha = require('mocha'),
-    fs = require('fs'),
-    path = require('path');
     
-// const Mocha = require('mocha');
-var Logger = require('../report/template');
+const Mocha = require('mocha');
 var QSLogger = require('../report/qsLogger');
 
 const {
@@ -17,8 +13,6 @@ const {
   EVENT_SUITE_BEGIN,
   EVENT_SUITE_END
 } = Mocha.Runner.constants;
-
-var totalPassed = 0;
 
 // this reporter outputs test results, indenting two spaces per suite
 class QSReport {

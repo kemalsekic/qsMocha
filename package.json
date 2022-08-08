@@ -1,15 +1,22 @@
 {
   "name": "qsmocha",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "",
-  "main": "index.js",
+  "main": "report/qsreport.js",
   "scripts": {
     "test": "mocha --reporter spec",
-    "qstest": "mocha --reporter report/qsreport.js"
+    "qstest": "mocha --reporter report/qsreport.js",
+    "bundle": "babel --plugins @babel/plugin-transform-modules-commonjs  report/qsreport.js -d cjs",
+    "bundles": "babel --presets @babel/preset-env report/qsreport.js -d cjs",
+    "bundie": "babel -d qsmocha cjs"
   },
   "author": "",
   "license": "ISC",
   "devDependencies": {
+    "@babel/cli": "^7.18.10",
+    "@babel/core": "^7.18.10",
+    "@babel/plugin-transform-modules-commonjs": "^7.18.6",
+    "@babel/preset-env": "^7.18.10",
     "chai": "^4.3.6",
     "mocha": "^10.0.0"
   },
