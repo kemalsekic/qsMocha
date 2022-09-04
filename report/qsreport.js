@@ -4,6 +4,7 @@
     
 const Mocha = require('mocha');
 var QSLogger = require('../report/qsLogger');
+var QSRJSON = require('./qsJSONReporter');
 
 const {
   EVENT_RUN_BEGIN,
@@ -17,6 +18,14 @@ const {
 // this reporter outputs test results, indenting two spaces per suite
 class QSReport {
   constructor(runner) {
+    var self = this;
+    var tests = [];
+    var pending = [];
+    var failures = [];
+    var passes = [];
+    var output;
+
+    Base.call(this, runner, options);
     this._indents = 0;
     const stats = runner.stats;
 
@@ -32,18 +41,14 @@ class QSReport {
         this.decreaseIndent();
       })
       .on(EVENT_TEST_PASS, test => {
-        // console.log(`${this.indent()}pass: ${test.fullTitle()}`);
         QSLogger.logPassedTest(test.fullTitle());
       })
       .on(EVENT_TEST_FAIL, (test, err) => {
         QSLogger.logFailedTest(test.fullTitle(), err.message);
-        // console.log(
-        //   `${this.indent()}fail: ${test.fullTitle()} - error: ${err.message}`
-        // );
+        QSRJSON.writeToJSON();
       })
       .once(EVENT_RUN_END, () => {
         QSLogger.finalResult(`${stats.passes}/${stats.passes + stats.failures} ok`);
-        // console.log(`end:`);
       });
   }
 

@@ -1,5 +1,7 @@
+// const Mocha = require('mocha');
+// Mocha.setup('bdd');
 const { assert } = require("chai");
-const Logger = require("../report/template");
+const Logs = require("../report/template");
 var expect = require("chai").expect;
 var converter = require("../app/converter");
 
@@ -23,12 +25,12 @@ describe("Color Code Converter", function () {
 
 describe("clearCompletedButtons", function () {
   it('should return "Clear completed" when more than 0 items are completed', function () {
-    var result = Logger.clearCompletedButtons(2);
+    var result = Logs.clearCompletedButtons(2);
     assert.ok(result, "Clear completed");
   });
 
   it("should return an empty string when 0 items are completed", function () {
-    var result = Logger.clearCompletedButtons(0);
+    var result = Logs.clearCompletedButtons(0);
     assert.ok(result, "Clear completed");
   });
 });

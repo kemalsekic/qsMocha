@@ -8,19 +8,34 @@
   </head>
   <body>
     <div id="mocha"></div>
- 
     <script src="../node_modules/chai/chai.js"></script>
     <script src="../node_modules/mocha/mocha.js"></script>
+    <script src="http://code.jquery.com/jquery-1.8.3.js"></script>
  
     <script class="mocha-init">
       mocha.setup('bdd');
       mocha.checkLeaks();
     </script>
-    <script src="../report/template.js"></script>
-    <script src="template.spec.js"></script>
-    <script src="../report/qsreport.js"></script>
-    <script class="mocha-exec">
-      mocha.run();
+
+    <script>
+      $(function(){
+    $('#clickMeBtn').on('click', function(){
+       alert('click event');
+       mocha.run();
+    });
+});
     </script>
+    <button id='all-tests-button' title='Click to run all Mocha tests'>Run Tests &#9658;</button>
+    <button id='clickMeBtn' title='Click here'>Click Me &#9658;</button>
+    <pre class="line-numbers"><code class="language-javascript">solutions_will_be_displayed_here(input) {
+  // Problems will be specified in comments.
+}</code></pre>
+    <!-- <script src="../report/qsreport.js"></script> -->
+    <script src="../report/qsJSONReporter.js"></script>
+    <script src="template.spec.js"></script>
+    <script src="/src/runTests.js"></script>
+    <!-- <script class="mocha-exec">
+      mocha.run();
+    </script> -->
   </body>
 </html>
